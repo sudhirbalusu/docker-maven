@@ -12,13 +12,14 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
   && rm -f /tmp/apache-maven.tar.gz \
-  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
+  && mkdir /root/.m2 \
  
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-RUN chown -R MAVEN_HOME
+RUN chmod 777 /usr/share/maven /root/.m2
 
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
