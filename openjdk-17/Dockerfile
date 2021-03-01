@@ -19,10 +19,11 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
-RUN chmod -R 777 "$USER_HOME_DIR/.m2"
+
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml /usr/share/maven/ref/
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
+RUN chmod -R 777 "$USER_HOME_DIR/.m2"
 CMD ["mvn"]
