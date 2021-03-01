@@ -27,4 +27,4 @@ COPY settings-docker.xml /usr/share/maven/ref/
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 
-CMD ["mvn"]
+CMD ["mvn -e"]
